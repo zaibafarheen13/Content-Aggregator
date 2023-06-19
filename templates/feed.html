@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>File Generator</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
+      body{
+      font-family: 'Open Sans', monospace;
+      background-image: url(https://img.freepik.com/premium-photo/scientific-molecule-background-with-flow-waves-medicine-science-technology-chemistry-wallpaper-banner-with-dna-molecules-geometric-dynamic-linear-waves-illustration_230610-1050.jpg?w=2000);
+      }
+      .icon{
+      width: 100px;
+      height: 100px;
+      filter: contrast(5);
+      }
+      .info{
+      background: rgba( 255, 255, 255, 0.25 );
+      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+      border-radius: 10px;
+      border: 1px solid rgba( 255, 255, 255, 0.18 );
+      width: 400px;
+      padding: 20px;
+      margin: 20px;
+      background-color: #e8e8e8;
+      }
+      #box{
+      width: 190px;
+      font-size: 12px;
+      line-height: 20px;
+      right: -140px;
+      top: 2%;
+      position: fixed;
+      z-index: 100;
+      }
+      #tab{
+      float: left;
+      list-style: none outside none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      z-index: 99;
+      }
+      #tab li span{
+      display: block;
+      padding: 0 5px;
+      position: relative;
+      }
+      #links{
+      width: 80px;
+      padding: 10px;
+      float: left;  
+      }
+      .show, .hide{
+      /* we specify the transition length for hiding and showing */
+      transition: margin-right .4s ease-in;
+      -webkit-transition: margin-right .4s ease-in;
+      }
+      .hide{
+      margin-right:0px;
+      }
+      .show{
+      margin-right:200px;
+      }
+      #arrow, .bt{
+      cursor: pointer;
+      user-select: none;
+      }
+      .bt{
+      width: 200px;
+      height: 50px;
+      margin: -1px;
+      text-align:center;
+      border-radius: 10px;
+      font: bold 13px Helvetica,Arial,sans-serif;
+      }
+      .bt a{
+      line-height: 40px;
+      text-decoration: none;
+      color: black;
+      display: block;
+      }
+      .bt a:hover{
+      color: white;
+      transition-delay: 0.1s;
+      font-size: 18px;
+      }
+      .bt:hover{
+      transition: background .3s linear;
+      background: #32A3D3;
+      -o-transition: background .3s linear;
+      -moz-transition: background .3s linear;
+      -webkit-transition: background .3s linear;
+      }
+      input[type=submit]{
+      border-radius: 0.5rem;
+      border: none;
+      background: linear-gradient(145deg, #fbfbfb, #d4d4d4);
+      color: grey;
+      margin-left: 20px;
+      padding: 0.9rem;
+      width: 150px;
+      font-size: 1rem;
+      }
+      input[type=submit]:hover{
+      background: #014464;
+      color: white;
+      }
+      input{
+      border: none;
+      width: 400px;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: #e8e8e8;
+      transition: 0.3s;
+      font-family: 'Open Sans';
+      font-size: 1rem;
+      color: rgb(104, 104, 104);
+      }
+      textarea{
+      border: none;
+      width: 800px;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: #e8e8e8;
+      transition: 0.3s;
+      font-family: 'Open Sans';
+      font-size: 1rem;
+      color: rgb(104, 104, 104);
+      }
+      input:focus {
+      outline-color: #e8e8e8;
+      background: #e8e8e8;
+      transition: 0.3s;
+      }
+      textarea:focus{
+      outline-color: #e8e8e8;
+      background: #e8e8e8;
+      transition: 0.3s;
+      }
+      h1{
+      font-size: 60px;
+      color: black;
+      padding: 1%;
+      }
+   </style>
+  </head>
+  <body>
+    <div id="box" class="hide">
+      <ul id="tab">
+          <li>
+              <img id="arrow" onclick="toggle('box');" src="http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png">
+          </li>
+      </ul>
+      <div id="links">
+          <div id="deco">
+              <div class="bt"><a href="{{ home_url }}" >Home</a></div>
+              <div class="bt"><a href="{{ news_url }}" >News Aggregator</a></div>
+              <div class="bt"><a href="{{ weather_url }}" >Weather Aggregator</a></div>
+              <div class="bt"><a href="{{ wiki_url }}" >Wikipedia Aggregator</a></div>
+              <div class="bt"><a href="{{ feed_url }}" >Feed</a></div>
+          </div>
+      </div>
+  </div>
+    <center>
+      <h1>Feed Generator</h1>
+      <form method="POST">
+        <input type="text" name="name" placeholder="Enter feed name" autocomplete="off"><br><br>
+        <textarea name="text" rows="5" cols="50" placeholder="Enter feed content..."></textarea><br><br>
+        <input type="submit" value="Generate Feed">
+      </form>
+      <br><br>
+      <div><h2 style="color:red;font-size: 22px;">{{ message }}</h2></div>
+    </center>
+    <script>
+      function toggle(id) {
+      var el = document.getElementById(id);
+      var img = document.getElementById("arrow");
+      var box = el.getAttribute("class");
+      if(box == "hide"){
+      el.setAttribute("class", "show");
+      delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowright.png", 400);
+      }
+      else{
+          el.setAttribute("class", "hide");
+          delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png", 400);
+      }
+      }
+
+      function delay(elem, src, delayTime){
+          window.setTimeout(function() {elem.setAttribute("src", src);}, delayTime);
+      }
+  </script>
+  </body>
+</html>

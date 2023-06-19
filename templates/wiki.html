@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Wikipedia Summarizer</title>
+      <style>
+         @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
+         body{
+         font-family: 'Open Sans', monospace;
+         background-image: url(https://img.freepik.com/premium-photo/scientific-molecule-background-with-flow-waves-medicine-science-technology-chemistry-wallpaper-banner-with-dna-molecules-geometric-dynamic-linear-waves-illustration_230610-1050.jpg?w=2000);
+         }
+         #box{
+         width: 190px;
+         font-size: 12px;
+         line-height: 20px;
+         right: -140px;
+         top: 2%;
+         position: fixed;
+         z-index: 100;
+         }
+         #tab{
+         float: left;
+         list-style: none outside none;
+         margin: 0;
+         padding: 0;
+         position: relative;
+         z-index: 99;
+         }
+         #tab li span{
+         display: block;
+         padding: 0 5px;
+         position: relative;
+         }
+         #links{
+         width: 80px;
+         padding: 10px;
+         float: left;  
+         }
+         .show, .hide{
+         /* we specify the transition length for hiding and showing */
+         transition: margin-right .4s ease-in;
+         -webkit-transition: margin-right .4s ease-in;
+         }
+         .hide{
+         margin-right:0px;
+         }
+         .show{
+         margin-right:200px;
+         }
+         #arrow, .bt{
+         cursor: pointer;
+         user-select: none;
+         }
+         .bt{
+         width: 200px;
+         height: 50px;
+         margin: -1px;
+         text-align:center;
+         border-radius: 10px;
+         font: bold 13px Helvetica,Arial,sans-serif;
+         }
+         .bt a{
+         line-height: 40px;
+         text-decoration: none;
+         color: black;
+         display: block;
+         }
+         .bt a:hover{
+         color: white;
+         transition-delay: 0.1s;
+         font-size: 18px;
+         }
+         .bt:hover{
+         transition: background .3s linear;
+         background: #32A3D3;
+         -o-transition: background .3s linear;
+         -moz-transition: background .3s linear;
+         -webkit-transition: background .3s linear;
+         }
+         p{
+         width: 800px;
+         padding: 20px;
+         margin: 20px;
+         border-radius: 10px;
+         background-color: white;
+         border: 2px solid rgba(23, 23, 23, 0.091);
+         }
+         p:hover{
+         background: rgba( 255, 255, 255, 0.25 );
+         box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+         backdrop-filter: blur( 4px );
+         -webkit-backdrop-filter: blur( 4px );
+         border-radius: 10px;
+         border: 1px solid rgba( 255, 255, 255, 0.18 );
+         width: 800px;
+         padding: 2%;
+         margin: 20px;
+         }
+         #box{
+         width: 190px;
+         font-size: 12px;
+         line-height: 20px;
+         right: -140px;
+         top: 2%;
+         position: fixed;
+         z-index: 100;
+         }
+         #tab{
+         float: left;
+         list-style: none outside none;
+         margin: 0;
+         padding: 0;
+         position: relative;
+         z-index: 99;
+         }
+         #tab li span{
+         display: block;
+         padding: 0 5px;
+         position: relative;
+         }
+         #links{
+         width: 80px;
+         padding: 10px;
+         float: left;  
+         }
+         .show, .hide{
+         /* we specify the transition length for hiding and showing */
+         transition: margin-right .4s ease-in;
+         -webkit-transition: margin-right .4s ease-in;
+         }
+         .hide{
+         margin-right:0px;
+         }
+         .show{
+         margin-right:200px;
+         }
+         #arrow, .bt{
+         cursor: pointer;
+         user-select: none;
+         }
+         .bt{
+         width: 200px;
+         height: 50px;
+         margin: -1px;
+         text-align:center;
+         border-radius: 10px;
+         font: bold 13px Helvetica,Arial,sans-serif;
+         }
+         .bt a{
+         line-height: 40px;
+         text-decoration: none;
+         color: black;
+         display: block;
+         }
+         .bt a:hover{
+         color: white;
+         transition-delay: 0.1s;
+         font-size: 18px;
+         }
+         .bt:hover{
+         transition: background .3s linear;
+         background: #32A3D3;
+         -o-transition: background .3s linear;
+         -moz-transition: background .3s linear;
+         -webkit-transition: background .3s linear;
+         }
+         .submit{
+         border-radius: 0.5rem;
+         border: none;
+         background: linear-gradient(145deg, #fbfbfb, #d4d4d4);
+         color: grey;
+         margin-left: 20px;
+         padding: 0.9rem;
+         width: 150px;
+         font-size: 1rem;
+         }
+         .submit:hover{
+         background: #014464;
+         color: white;
+         }
+         input {
+         border: none;
+         width: 400px;
+         padding: 1rem;
+         border-radius: 0.5rem;
+         background: #e8e8e8;
+         transition: 0.3s;
+         font-size: 1rem;
+         color: rgb(104, 104, 104);
+         }
+         input:focus {
+         outline-color: #e8e8e8;
+         background: #e8e8e8;
+         transition: 0.3s;
+         }
+         h1{
+         font-size: 60px;
+         padding: 1%;
+         }
+         h2{
+         font-size: 40px;
+         }
+         .link-toggle{
+            background-color: transparent;
+            border: none;
+            color: black;
+            font-size: 15px;
+            font-weight: 600;
+            padding-top: 10px;
+         }
+         .link-toggle:hover{
+            color: white;
+            font-size: 18px;
+         }
+         .content{
+            background: rgba( 255, 255, 255, 0.25 );
+         box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+         backdrop-filter: blur( 4px );
+         -webkit-backdrop-filter: blur( 4px );
+         border-radius: 10px;
+         border: 1px solid rgba( 255, 255, 255, 0.18 );
+         width: 800px;
+         padding: 2%;
+         margin: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="box" class="hide">
+         <ul id="tab">
+            <li>
+               <img id="arrow" onclick="toggle('box');" src="http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png">
+            </li>
+         </ul>
+         <div id="links">
+            <div id="deco">
+               <div class="bt"><button onclick="location.href='{{ home_url }}'" class="link-toggle">Home</button></div>
+               <div class="bt"><button onclick="location.href='{{ news_url }}'" class="link-toggle">News Aggregator</button></div>
+               <div class="bt"><button onclick="location.href='{{ weather_url }}'" class="link-toggle">Weather Aggregator</button></div>
+               <div class="bt"><button onclick="location.href='{{ wiki_url }}'" class="link-toggle">Wikipedia Aggregator</button></div>
+               <div class="bt"><button onclick="location.href='{{ feed_url }}'" class="link-toggle">Feed</button></div>
+            </div>
+         </div>
+      </div>
+      <center>
+         <h1>Wikipedia Aggregator</h1>
+         <form action="/wiki/" method="GET" autocomplete="off">
+            <input type="text" name="q" id="q" value="{{ q }}" class="input" placeholder="Search Wikipedia..." autocomplete="off"><br><br>
+            <button type="submit" class="submit">Search</button>
+         </form>
+         {% if data %}
+         <h2>Search Results:</h2>
+         <ul>
+            {% for result in data["query"]["search"] %}
+            <p><a href="https://en.wikipedia.org/wiki/{{ result["title"].replace(' ', '_') }}" id="search-results">{{ result["title"] }}</a></p>
+            {% endfor %}
+         </ul>
+         {% endif %}    
+         <br>
+         <hr>
+         <br>
+         <h2>Wikipedia Summarizer</h2>
+         <form action="/wiki/" method="POST" autocomplete="off">
+            <input type="text" name="url" id="url" class="input" placeholder="Enter a Wikipedia URL...">
+            <button type="submit" class="submit">Submit</button>
+         </form>
+         <br><br>
+         {% if url_content %}
+         <h2>Summary</h2>
+         <center>
+            <p class="content">
+               {% for sentence in url_content.split('.') %}
+               {% if loop.index <= 20 %}
+               {{ sentence }}.
+               {% endif %}
+               {% endfor %}
+            </p>
+            {% endif %}
+            <br>
+         </center>
+      </center>
+      <script>
+         const links = document.querySelectorAll('a');
+         
+         // Loop through the links and add a click event listener to each one
+         links.forEach(link => {
+         link.addEventListener('click', (event) => {
+         // Prevent the link from following its default behavior
+         event.preventDefault();
+         // Get the href attribute of the clicked link
+         const linkHref = link.href;
+         
+         // Copy the link to the clipboard
+         navigator.clipboard.writeText(linkHref)
+         .then(() => {
+         console.log('Link copied to clipboard');
+         })
+         .catch((err) => {
+         console.error('Failed to copy link: ', err);
+         });
+         });
+         });
+         
+         // Get all p elements in the page
+         const paragraphs = document.querySelectorAll('p');
+         
+         // Loop through the paragraphs and add a click event listener to each one
+         paragraphs.forEach(paragraph => {
+         paragraph.addEventListener('click', () => {
+             // Create a new temporary textarea element
+             const tempTextarea = document.createElement('textarea');
+             // Set the text content of the textarea to the clicked paragraph's text content
+             tempTextarea.value = paragraph.textContent;
+             // Append the textarea element to the body of the page
+             document.body.appendChild(tempTextarea);
+             // Select the text in the textarea
+             tempTextarea.select();
+             // Copy the selected text to the clipboard
+             document.execCommand('copy');
+             // Remove the textarea element from the body of the page
+             document.body.removeChild(tempTextarea);
+         });
+         });
+         function toggle(id) {
+            var el = document.getElementById(id);
+            var img = document.getElementById("arrow");
+            var box = el.getAttribute("class");
+            if(box == "hide"){
+            el.setAttribute("class", "show");
+            delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowright.png", 400);
+            }
+            else{
+                el.setAttribute("class", "hide");
+                delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png", 400);
+            }
+         }
+         
+            function delay(elem, src, delayTime){
+                window.setTimeout(function() {elem.setAttribute("src", src);}, delayTime);
+            }
+      </script>
+   </body>
+</html>

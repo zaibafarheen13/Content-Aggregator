@@ -1,0 +1,330 @@
+<html>
+    <head>
+        <style>
+              @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+              @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
+
+*,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+body{
+    margin-top: 15vh;
+    background-image: url(https://img.freepik.com/premium-photo/scientific-molecule-background-with-flow-waves-medicine-science-technology-chemistry-wallpaper-banner-with-dna-molecules-geometric-dynamic-linear-waves-illustration_230610-1050.jpg?w=2000);
+    background-size: cover;
+}
+
+#box{
+    width: 190px;
+    font-size: 12px;
+    line-height: 20px;
+    right: -140px;
+    top: 2%;
+    position: fixed;
+    z-index: 100;
+}
+
+#tab{
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+
+#tab li span{
+    display: block;
+    padding: 0 5px;
+    position: relative;
+}
+
+#links{
+    width: 80px;
+    padding: 10px;
+    float: left;  
+}
+
+.show, .hide{
+    /* we specify the transition length for hiding and showing */
+            transition: margin-right .4s ease-in;
+    -webkit-transition: margin-right .4s ease-in;
+}
+
+.hide{
+    margin-right:0px;
+}
+
+.show{
+    margin-right:200px;
+}
+
+#arrow, .bt{
+    cursor: pointer;
+    user-select: none;
+}
+
+.bt{
+    width: 200px;
+    height: 50px;
+    margin: -1px;
+    text-align:center;
+    border-radius: 10px;
+    font: bold 13px Helvetica,Arial,sans-serif;
+}
+
+.bt a{
+    line-height: 40px;
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+.bt a:hover{
+    color: white;
+    transition-delay: 0.1s;
+    font-size: 18px;
+}
+.bt:hover{
+    transition: background .3s linear;
+    background: #32A3D3;
+         -o-transition: background .3s linear;
+       -moz-transition: background .3s linear;
+    -webkit-transition: background .3s linear;
+}
+
+
+
+/*=====================*/
+.shape-box {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    height: 430px;
+    margin: 30px 10px 30px;
+    box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .12);
+    overflow: hidden;
+    width: 23.333%;
+    border-radius: 5%;
+}
+
+.shape-box_half {
+    overflow: hidden;
+    text-align: left;
+}
+
+.shape-box_half:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: skewY(53.5deg);
+    transform-origin: top left;
+    transition: \transform .4s;
+    background: #fff;
+    z-index: 1;
+}
+
+.shape-box>img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.bg-black {
+    background-color: #000;
+}
+
+.shape-box_half figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 30px 30px;
+    transition: \transform .4s;
+    transform: translateY(100%);
+    z-index: 3;
+}
+
+.shape-box_half figcaption .show-cont {
+    position: absolute;
+    bottom: calc(100% + 30px);
+    left: 30px;
+    right: 30px;
+    transition: bottom .4s;
+}
+
+.card-no {
+    font-size: 36px;
+    /*color: #ffc107;*/
+    color: #014464;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.card-main-title {
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #292b2c;
+}
+
+.card-content {
+    color: #9f9f9f;
+    margin-top: 20px;
+    line-height: 22px;
+    font-size: 15px;
+}
+
+.read-more-btn {
+    border: 2px solid #db3236;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 600;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    background: #db3236;
+    color: #fff;
+    border-radius: 2px;
+    margin-top: 25px;
+    text-decoration: none;
+}
+
+.read-more-btn:hover {
+    background: transparent;
+    color: #db3236;
+
+}
+
+.shape-box_half>.after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #014464;
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+/*On hover*/
+.shape-box_half:hover:before {
+    transform: skewY(20deg);
+}
+
+.shape-box_half:hover figcaption {
+    transform: translateY(0);
+}
+
+.shape-box_half:hover figcaption .show-cont {
+    bottom: 100%;
+}
+
+.shape-box_half:hover>.after {
+    opacity: 1;
+}
+
+h1{
+    color: #014464;
+    font-size: 40px;
+    font-family: 'Open Sans', sans-serif;
+    user-select: none;
+}
+
+    </style>
+    </head>
+    <body>
+        <div id="box" class="hide">
+            <ul id="tab">
+                <li>
+                    <img id="arrow" onclick="toggle('box');" src="http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png">
+                </li>
+            </ul>
+            <div id="links">
+                <div id="deco">
+                    <div class="bt"><a href="{{ home_url }}" >Home</a></div>
+                    <div class="bt"><a href="{{ news_url }}" >News Aggregator</a></div>
+                    <div class="bt"><a href="{{ weather_url }}" >Weather Aggregator</a></div>
+                    <div class="bt"><a href="{{ wiki_url }}" >Wikipedia Aggregator</a></div>
+                    <div class="bt"><a href="{{ feed_url }}" >Feed</a></div>
+                </div>
+            </div>
+        </div>
+        <center>
+            <h1>Content Aggregation</h1><br>
+            <div class="box-wrapper">
+                <figure class="shape-box shape-box_half">
+                    <img src="https://images.unsplash.com/photo-1586339949216-35c2747cc36d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+                    <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                    <figcaption>
+                        <div class="show-cont">
+                            <h3 class="card-no">01</h3>
+                            <h4 class="card-main-title">News</h4>
+                        </div>
+                        <p class="card-content">A news aggregator that uses an API to collect news articles can also utilize API integration to store the articles for future reference. This allows users to access previously read articles at any time, making the news aggregator a valuable tool for staying informed.</p>
+                        <a href="{{ news_url }}" class="read-more-btn">Go</a>
+                    </figcaption>
+                    <span class="after"></span>
+                </figure>
+                <figure class="shape-box shape-box_half">
+                    <img src="https://images.unsplash.com/photo-1643717583148-950284638774?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80">
+                    <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                    <figcaption>
+                        <div class="show-cont">
+                            <h3 class="card-no">02</h3>
+                            <h4 class="card-main-title">Weather</h4>
+                        </div>
+                        <p class="card-content">A weather aggregator that uses an API can provide accurate and real-time weather information based on location. The API enables the app to access weather data, allowing users to stay up-to-date with current weather conditions.</p>
+                        <a href="{{ weather_url }}" class="read-more-btn">Go</a>
+                    </figcaption>
+                    <span class="after"></span>
+                </figure>
+                <figure class="shape-box shape-box_half">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikipedia_mini_globe.jpg/320px-Wikipedia_mini_globe.jpg">
+                    <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                    <figcaption>
+                        <div class="show-cont">
+                            <h3 class="card-no">03</h3>
+                            <h4 class="card-main-title">Wikipedia</h4>
+                        </div>
+                        <p class="card-content">A wikipedia aggregator using bs4 is a Python script that can scrape data from Wikipedia pages and consolidate them into a single location by utilizing the bs4 library for web scraping and parsing HTML and XML documents.</p>
+                        <a href="{{ wiki_url }}" class="read-more-btn">Go</a>
+                    </figcaption>
+                    <span class="after"></span>
+                </figure>
+            </div>
+        </center>
+        <script>
+            function toggle(id) {
+            var el = document.getElementById(id);
+            var img = document.getElementById("arrow");
+            var box = el.getAttribute("class");
+            if(box == "hide"){
+            el.setAttribute("class", "show");
+            delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowright.png", 400);
+            }
+            else{
+                el.setAttribute("class", "hide");
+                delay(img, "http://www.webtutorialsource.com/wp-content/uploads/2019/07/arrowleft.png", 400);
+            }
+            }
+
+            function delay(elem, src, delayTime){
+                window.setTimeout(function() {elem.setAttribute("src", src);}, delayTime);
+            }
+        </script>
+    </body>
+</html>
+
